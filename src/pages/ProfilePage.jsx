@@ -108,17 +108,17 @@ function ProfilePage() {
     if (!username && !userProfile) return <p>Loading...</p>;
 
     return (
-        <div className="space-y-6">
+        <div className="space-y-4 md:space-y-6">
 
             {/* HEADER */}
-            <div className="flex items-center gap-4 border-b border-white/10 pb-4">
+            <div className="flex flex-col md:flex-row items-start md:items-center gap-4 border-b border-white/10 pb-4">
                 <img
                     src={getAvatar(profile)}
-                    className="w-16 h-16 rounded-full"
+                    className="w-14 h-14 md:w-16 md:h-16 rounded-full"
                 />
 
-                <div>
-                    <h2 className="text-xl font-bold">
+                <div className="flex-1 space-y-1">
+                    <h2 className="text-lg md:text-xl font-bold">
                         {profile?.username || profile?.email || "You"}
                     </h2>
                     {isMe && (
@@ -127,19 +127,19 @@ function ProfilePage() {
                                 setIsEditing(true);
                                 setNewUsername(profile.username);
                             }}
-                            className="text-sm text-gray-400"
+                            className="text-sm text-gray-400 cursor-pointer hover:text-white transition-all duration-200"
                         >
                             Edit Profile
                         </button>
                     )}
 
                     {reviews.length === 0 ? (
-                        <p className="text-gray-400">No reviews yet</p>
+                        <p className="text-xs md:text-sm text-gray-400">No reviews yet</p>
                     ) : (<>
-                        <p className="text-gray-400">
+                        <p className="text-xs md:text-sm text-gray-400">
                             {reviews.length} reviews • {totalLikes} likes
                         </p>
-                        <p className="text-gray-400">
+                        <p className="text-xs md:text-sm text-gray-400">
                             {followersCount} followers • {followingCount} following
                         </p></>
                     )}
@@ -149,10 +149,10 @@ function ProfilePage() {
                     <button
                         onClick={toggleFollow}
                         disabled={isLoading}
-                        className={`px-4 py-2 rounded text-sm font-semibold transition ${isFollowing
+                        className={`px-3 py-2 md:px-4 md:py-2 text-sm md:text-base rounded-md font-semibold transition-all duration-200 active:scale-95 ${isFollowing
                             ? "bg-gray-600 text-white"
-                            : "bg-green-400 text-black"
-                            } ${isLoading ? "opacity-50 cursor-not-allowed" : ""}`}
+                            : "bg-accent text-black"
+                            }`}
                     >
                         {isLoading
                             ? "Loading..."
@@ -169,7 +169,7 @@ function ProfilePage() {
                     <input
                         value={newUsername}
                         onChange={(e) => setNewUsername(e.target.value)}
-                        className="bg-[#141A18] p-2 rounded w-full"
+                        className="bg-base p-2 rounded-md w-full text-sm outline-none focus:ring-2 focus:ring-accent"
                     />
 
                     <div className="flex gap-2">
@@ -185,7 +185,7 @@ function ProfilePage() {
                                 });
                             }}
                             disabled={updateMutation.isLoading}
-                            className={`bg-green-400 text-black px-3 py-1 rounded ${updateMutation.isLoading ? "opacity-50" : ""
+                            className={`bg-accent text-black px-3 py-1 rounded-md text-sm transition-all duration-200 active:scale-95 ${updateMutation.isLoading ? "opacity-50" : ""
                                 }`}
                         >
                             {updateMutation.isLoading ? "Saving..." : "Save"}
@@ -193,7 +193,7 @@ function ProfilePage() {
 
                         <button
                             onClick={() => setIsEditing(false)}
-                            className="text-gray-400"
+                            className="text-gray-400 text-sm cursor-pointer hover:text-white transition-all duration-200"
                         >
                             Cancel
                         </button>
@@ -204,7 +204,7 @@ function ProfilePage() {
 
             {/* REVIEWS */}
             {reviews.length === 0 ? (
-                <div className="text-gray-400">
+                <div className="text-gray-400 space-y-1">
                     <p>No reviews yet</p>
                     {isMe && (
                         <button

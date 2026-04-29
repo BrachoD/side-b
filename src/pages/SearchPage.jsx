@@ -70,9 +70,9 @@ function SearchPage() {
                         >
                             <img
                                 src={getAvatar(user)}
-                                className="w-8 h-8 rounded-full"
+                                className="w-8 h-8 rounded-full cursor-pointer transition-all duration-200 hover:opacity-80"
                             />
-                            <p>{user.username}</p>
+                            <p className="text-sm font-semibold cursor-pointer hover:underline hover:text-white transition-all duration-200">{user.username}</p>
                         </div>
                     ))}
                 </div>

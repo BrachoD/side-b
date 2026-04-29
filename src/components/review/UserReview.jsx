@@ -17,12 +17,12 @@ function UserReview({ review, onDelete, onEdit, isDeleting }) {
     if (!review) return null;
 
     return (
-        <div className="bg-[#141A18] rounded-xl p-4 space-y-4 border border-green-500/30">
+        <div className="bg-base rounded-xl p-4 space-y-3 md:space-y-4 border border-accent/30 transition-all duration-200">
 
             {/* Header */}
             <div className="flex items-center gap-3">
                 {isLoading ? (
-                    <div className="w-10 h-10 rounded-full bg-[#1A221F]" />
+                    <div className="w-10 h-10 rounded-full bg-baseHover animate-pulse" />
                 ) : (
                     <img
                         src={getAvatar(user)}
@@ -31,7 +31,7 @@ function UserReview({ review, onDelete, onEdit, isDeleting }) {
                             e.stopPropagation();
                             navigate(`/profile/${user?.username}`);
                         }}
-                        className="w-10 h-10 rounded-full cursor-pointer"
+                        className=" w-10 h-10 rounded-full cursor-pointer transition-all duration-200 hover:opacity-80"
                     />
                 )}
 
@@ -39,9 +39,9 @@ function UserReview({ review, onDelete, onEdit, isDeleting }) {
                     <p onClick={(e) => {
                         e.stopPropagation();
                         navigate(`/profile/${user?.username}`);
-                    }} className="text-sm font-semibold cursor-pointer hover:underline">
+                    }} className="text-sm font-semibold cursor-pointer hover:underline hover:text-white transition-all duration-200">
                         {user?.username || "Loading..."}{" "}
-                        <span className="text-green-400">(You)</span>
+                        <span className="text-accent">(You)</span>
                     </p>
                     <p className="text-xs text-gray-400">
                         {formatDate(review.date)}
@@ -53,30 +53,33 @@ function UserReview({ review, onDelete, onEdit, isDeleting }) {
             <RatingStars rating={review.rating} />
 
             {/* Review text */}
-            <p className="text-sm text-gray-300">
+            <p className="text-sm md:text-base text-gray-300">
                 {review.text}
             </p>
 
             {/* Actions */}
-            <div className="flex gap-4 text-sm">
+            <div className="flex flex-wrap gap-3 text-sm">
                 <button
                     onClick={(e) => {
                         e.stopPropagation();
                         toggleLike();
                     }}
-                    className={`cursor-pointer transition transform ${hasLiked
-                        ? "text-green-400 scale-110"
-                        : "text-gray-400 hover:text-green-400"
-                        }`}
+                    className={`cursor-pointer transition-all duration-200 active:scale-90
+                            ${hasLiked
+                            ? "text-accent scale-110"
+                            : "text-gray-400 hover:text-accent"
+                        }
+                    `}
                 >
                     👍 {likeCount}
                 </button>
+
                 <button
                     onClick={(e) => {
                         e.stopPropagation();
                         onEdit();
                     }}
-                    className="text-blue-400 hover:underline hover:text-blue-300 transition"
+                    className="text-blue-400 cursor-pointer hover:text-blue-300 transition-all duration-200"
                 >
                     Edit
                 </button>
@@ -89,7 +92,7 @@ function UserReview({ review, onDelete, onEdit, isDeleting }) {
                         onDelete();
                     }}
                     disabled={isDeleting}
-                    className={`text-red-400 hover:text-red-300 cursor-pointer hover:underline transition ${isDeleting ? "opacity-50 cursor-not-allowed" : ""
+                    className={`text-red-400 cursor-pointer hover:text-red-300 transition-all duration-200 ${isDeleting ? "opacity-50 cursor-not-allowed" : ""
                         }`}
                 >
                     {isDeleting ? "Deleting..." : "Delete"}

@@ -116,14 +116,13 @@ function HomePage() {
                         >
                             <img
                                 src={getAvatar(u)}
-                                className="w-8 h-8 rounded-full"
+                                className="w-8 h-8 rounded-full cursor-pointer transition-all duration-200 hover:opacity-80"
                             />
-                            <p>{u.username}</p>
+                            <p className="text-sm font-semibold cursor-pointer hover:underline hover:text-white transition-all duration-200">{u.username}</p>
                         </div>
                     ))}
                 </div>
             )}
-
         </div>
     );
 }
