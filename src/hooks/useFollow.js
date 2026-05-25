@@ -1,5 +1,6 @@
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { followUser, unfollowUser, getFollow } from "../services/followService";
+import toast from "react-hot-toast";
 
 export const useFollow = (currentUserId, targetUserId) => {
   const queryClient = useQueryClient();
@@ -28,8 +29,10 @@ export const useFollow = (currentUserId, targetUserId) => {
 
   const toggleFollow = () => {
     if (isFollowing) {
+      toast.success("Unfollowed user");
       unfollowMutation.mutate();
     } else {
+      toast.success("Following user");
       followMutation.mutate();
     }
   };

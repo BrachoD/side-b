@@ -1,6 +1,7 @@
 import { useParams } from "react-router-dom";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { useState } from "react";
+import toast from "react-hot-toast";
 
 import { getAlbum } from "../services/musicApi";
 import { createReview, getReviews, deleteReview, updateReview } from "../services/reviewService";
@@ -62,10 +63,20 @@ function AlbumPage() {
 
         onError: (err, newReview, context) => {
             console.error("CREATE REVIEW ERROR:", err);
+
+            toast.error("Could not post review");
+
             queryClient.setQueryData(["feed"], context.previousFeed);
         },
 
-        onSettled: () => {
+        // onSettled: () => {
+        //     queryClient.invalidateQueries(["feed"]);
+        //     queryClient.invalidateQueries(["reviews", id]);
+        // },
+
+        onSuccess: () => {
+            toast.success("Review posted 🎵");
+
             queryClient.invalidateQueries(["feed"]);
             queryClient.invalidateQueries(["reviews", id]);
         },
@@ -73,17 +84,35 @@ function AlbumPage() {
 
     const deleteMutation = useMutation({
         mutationFn: deleteReview,
+
         onSuccess: () => {
+            toast.success("Review deleted");
+
             queryClient.invalidateQueries(["reviews", id]);
             queryClient.invalidateQueries(["feed"]);
+        },
+
+        onError: (err) => {
+            console.error("DELETE REVIEW ERROR:", err);
+
+            toast.error("Could not delete review");
         },
     });
 
     const updateMutation = useMutation({
         mutationFn: ({ reviewId, data }) => updateReview(reviewId, data),
+
         onSuccess: () => {
+            toast.success("Review updated");
+
             queryClient.invalidateQueries(["reviews", id]);
             queryClient.invalidateQueries(["feed"]);
+        },
+
+        onError: (err) => {
+            console.error("UPDATE REVIEW ERROR:", err);
+
+            toast.error("Could not update review");
         },
     });
 

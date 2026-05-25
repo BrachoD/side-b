@@ -36,43 +36,43 @@ function SearchPage() {
     });
 
     return (
-        <div className="space-y-6">
+        <div className="space-y-4 md:space-y-6">
 
             <input
                 type="text"
                 placeholder="Search albums, artist, users..."
-                className="w-full p-3 rounded bg-[#141A18]"
+                className="w-full p-3 rounded-md bg-base text-sm md:text-base outline-none focus:ring-2 focus:ring-accent transition-all duration-200"
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
             />
 
             {query.length <= 1 ? (
-                <p className="text-gray-400">Start typing to search</p>
+                <p className="text-gray-400 text-sm">Start typing to search</p>
             ) : (isLoading || usersLoading) ? (
-                <p className="text-gray-400">Searching...</p>
+                <p className="text-gray-400 text-sm">Searching...</p>
             ) : null}
 
             {query.length > 1 && !isLoading && !usersLoading &&
                 !data?.length && !usersData?.documents?.length && (
-                    <p className="text-gray-400">No results</p>
+                    <p className="text-gray-400 text-sm">No results</p>
                 )}
 
             {/* USERS */}
             {usersData?.documents?.length > 0 && (
                 <div className="space-y-2">
-                    <p className="text-gray-400 text-sm">Users</p>
+                    <p className="text-gray-400 text-xs md:text-sm font-medium">Users</p>
 
                     {usersData.documents.slice(0, 5).map((user) => (
                         <div
                             key={user.$id}
                             onClick={() => navigate(`/profile/${user.username}`)}
-                            className="flex items-center gap-3 p-2 hover:bg-[#1A221F] rounded cursor-pointer transition"
+                            className="flex items-center gap-3 p-2 rounded-md cursor-pointer hover:bg-baseHover transition-all duration-200 ative:scale-[0.98]"
                         >
                             <img
                                 src={getAvatar(user)}
-                                className="w-8 h-8 rounded-full cursor-pointer transition-all duration-200 hover:opacity-80"
+                                className="w-8 h-8 rounded-full flex-shrink-0"
                             />
-                            <p className="text-sm font-semibold cursor-pointer hover:underline hover:text-white transition-all duration-200">{user.username}</p>
+                            <p className="text-sm md:text-base font-medium">{user.username}</p>
                         </div>
                     ))}
                 </div>
@@ -81,9 +81,9 @@ function SearchPage() {
             {/* ALBUMS */}
             {data?.length > 0 && (
                 <div className="space-y-2">
-                    <p className="text-gray-400 text-sm">Albums</p>
+                    <p className="text-gray-400 text-xs md:text-sm font-medium">Albums</p>
 
-                    <div className="grid grid-cols-3 gap-4">
+                    <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-4">
                         {data.slice(0, 6).map((album) => (
                             <AlbumCard
                                 key={album.id}

@@ -1,5 +1,6 @@
 import Sidebar from "../components/Sidebar";
 import RightPanel from "../components/RightPanel";
+import MobileNav from "../components/MobileNav";
 
 function MainLayout({ children }) {
     return (
@@ -11,7 +12,7 @@ function MainLayout({ children }) {
             </div>
 
             {/* Main */}
-            <main className="flex-1 overflow-y-auto px-3 py-4 sm:px-4 md:px-6">
+            <main className="flex-1 overflow-y-auto px-3 py-4 sm:px-4 md:px-6 pb-16 md:pb-6">
                 {children}
             </main>
 
@@ -19,6 +20,8 @@ function MainLayout({ children }) {
             <div className="hidden lg:block">
                 <RightPanel />
             </div>
+
+            <MobileNav />
 
         </div>
     );

@@ -1,5 +1,6 @@
 import { useParams, useNavigate } from "react-router-dom";
 import { useState } from "react";
+import toast from "react-hot-toast";
 
 
 import { useCurrentUser } from "../hooks/useCurrentUser";
@@ -98,6 +99,7 @@ function ProfilePage() {
     const updateMutation = useMutation({
         mutationFn: ({ docId, data }) => updateUserProfile(docId, data),
         onSuccess: () => {
+            toast.success("Profile updated");
             queryClient.invalidateQueries(["user", user?.$id]);
             queryClient.invalidateQueries(["userByUsername", username]);
             setIsEditing(false);
