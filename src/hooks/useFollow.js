@@ -14,14 +14,22 @@ export const useFollow = (currentUserId, targetUserId) => {
   const followMutation = useMutation({
     mutationFn: () => followUser(currentUserId, targetUserId),
     onSuccess: () => {
+      toast.success("Following user");
       queryClient.invalidateQueries(["follow", currentUserId, targetUserId]);
+    },
+    onError: () => {
+      toast.success("Error following user");
     },
   });
 
   const unfollowMutation = useMutation({
     mutationFn: () => unfollowUser(followDoc.$id),
     onSuccess: () => {
+      toast.success("Unfollowed user");
       queryClient.invalidateQueries(["follow", currentUserId, targetUserId]);
+    },
+    onError: () => {
+      toast.success("Error unfollowing user");
     },
   });
 
@@ -29,10 +37,8 @@ export const useFollow = (currentUserId, targetUserId) => {
 
   const toggleFollow = () => {
     if (isFollowing) {
-      toast.success("Unfollowed user");
       unfollowMutation.mutate();
     } else {
-      toast.success("Following user");
       followMutation.mutate();
     }
   };

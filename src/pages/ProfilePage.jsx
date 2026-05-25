@@ -15,6 +15,8 @@ import { getUserByUsername, updateUserProfile } from "../services/userService";
 import { getFollowers, getFollowing } from "../services/followService";
 
 import ReviewList from "../components/review/ReviewList";
+import ProfilePageSkeleton from "../components/skeletons/ProfilePageSkeleton";
+
 import { getAvatar } from "../utils/getAvatar";
 
 function ProfilePage() {
@@ -106,8 +108,13 @@ function ProfilePage() {
         },
     });
 
-    if (username && !userByUsername) return <p>Loading...</p>;
-    if (!username && !userProfile) return <p>Loading...</p>;
+    const isProfileLoading = (username && !userByUsername) || (!username && !userProfile);
+
+    if (isProfileLoading) {
+        return (
+            <ProfilePageSkeleton />
+        )
+    }
 
     return (
         <div className="space-y-4 md:space-y-6">

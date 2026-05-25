@@ -11,6 +11,7 @@ import Tracklist from "../components/album/Tracklist";
 import UserReview from "../components/review/UserReview";
 import ReviewList from "../components/review/ReviewList";
 import ReviewForm from "../components/review/ReviewForm";
+import AlbumPageSkeleton from "../components/skeletons/AlbumPageSkeleton";
 
 import { formatDuration } from "../utils/formatDuration";
 
@@ -116,8 +117,11 @@ function AlbumPage() {
         },
     });
 
-    if (!user) return <p>Loading user...</p>;
-    if (isLoading) return <p>Loading...</p>;
+    if (isLoading) {
+        return (
+            <AlbumPageSkeleton />
+        );
+    }
 
     const album = {
         title: data.title,

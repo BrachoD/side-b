@@ -8,7 +8,7 @@ import { getSuggestedUsers } from "../services/userService";
 import { useCurrentUser } from "../hooks/useCurrentUser";
 
 import ReviewCard from "../components/review/ReviewCard";
-import ReviewCardSkeleton from "../components/review/ReviewCardSkeleton";
+import ReviewCardSkeleton from "../components/skeletons/ReviewCardSkeleton";
 
 import { getAvatar } from "../utils/getAvatar";
 
