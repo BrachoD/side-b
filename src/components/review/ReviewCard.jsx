@@ -13,7 +13,7 @@ function ReviewCard({ review }) {
     const navigate = useNavigate();
 
     return (
-        <div onClick={() => navigate(`/album/${review.album.id}`)} className="bg-base rounded-xl p-4 space-y-4 hover:bg-baseHover transition-all duration-200 active:scale-[0.98]">
+        <div onClick={() => navigate(`/album/${review.album.id}`)} className="bg-base rounded-xl p-4 space-y-4 hover:bg-baseHover transition-all ease-out active:scale-[0.98] hover:-translate-y-0.5 hover:shadow-lg hover:shadow-black/20 animate-in fade-in duration-300">
 
             {/* Header */}
             <div className="flex items-center gap-3">
@@ -26,7 +26,7 @@ function ReviewCard({ review }) {
                             e.stopPropagation();
                             navigate(`/profile/${user?.username}`);
                         }}
-                        className="w-10 h-10 rounded-full cursor-pointer transition-all duration-200 hover:opacity-80"
+                        className="w-10 h-10 rounded-full cursor-pointer transition-all duration-200 hover:opacity-80 hover:scale-105"
                     />
                 )}
 

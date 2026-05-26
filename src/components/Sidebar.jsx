@@ -24,7 +24,7 @@ function Sidebar() {
             </div>
 
             <div>
-                <button className="w-full bg-green-500 text-black py-2 rounded">
+                <button className="w-full bg-green-500 text-black py-2 rounded active:scale-95 hover:brightness-110">
                     New Review
                 </button>
             </div>

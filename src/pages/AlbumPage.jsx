@@ -70,11 +70,6 @@ function AlbumPage() {
             queryClient.setQueryData(["feed"], context.previousFeed);
         },
 
-        // onSettled: () => {
-        //     queryClient.invalidateQueries(["feed"]);
-        //     queryClient.invalidateQueries(["reviews", id]);
-        // },
-
         onSuccess: () => {
             toast.success("Review posted 🎵");
 
@@ -170,7 +165,7 @@ function AlbumPage() {
             {!myReview && (
                 <button
                     onClick={() => setShowForm(true)}
-                    className="bg-green-500 text-black px-4 py-2 rounded"
+                    className="bg-green-500 text-black px-4 py-2 rounded active:scale-95 hover:brightness-110"
                 >
                     Write Review
                 </button>

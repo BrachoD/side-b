@@ -33,11 +33,11 @@ function AlbumHeader({ album }) {
 
                 {/* Actions */}
                 <div className="flex gap-3">
-                    <button className="bg-green-500 text-black px-4 py-2 rounded">
+                    <button className="bg-green-500 text-black px-4 py-2 rounded active:scale-95 hover:brightness-110">
                         Write Review
                     </button>
 
-                    <button className="bg-[#1A221F] px-4 py-2 rounded">
+                    <button className="bg-[#1A221F] px-4 py-2 rounded active:scale-95 hover:brightness-110">
                         Rate
                     </button>
                 </div>

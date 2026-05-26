@@ -69,7 +69,7 @@ function SearchPage() {
                                 <div
                                     key={user.$id}
                                     onClick={() => navigate(`/profile/${user.username}`)}
-                                    className="flex items-center gap-3 p-2 rounded-md cursor-pointer hover:bg-baseHover transition-all duration-200 active:scale-[0.98]"
+                                    className="flex items-center gap-3 p-2 rounded-md cursor-pointer hover:bg-baseHover hover:translate-x-1 transition-all duration-200 active:scale-[0.98]"
                                 >
                                     <img
                                         src={getAvatar(user)}

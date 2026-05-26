@@ -26,7 +26,7 @@ function ReviewForm({ onSubmit, initialData }) {
                 value={text}
                 maxLength={500}
                 onChange={(e) => setText(e.target.value)}
-                className="w-full bg-base p-3 rounded-md text-sm md:text-base outline-none resize-none min-h-[120px] md:min-h-[140px] focus:ring-2 focus:ring-accent transition-all duration-200"
+                className="w-full bg-base p-3 rounded-md text-sm md:text-base outline-none resize-none min-h-[120px] md:min-h-[140px] focus:ring-2 focus:ring-accent focus:scale-[1.01] transition-all duration-200"
             />
             <p className="text-xs text-gray-400 text-right">
                 {text.length}/500
@@ -42,7 +42,7 @@ function ReviewForm({ onSubmit, initialData }) {
                     text-sm md:text-base
                     font-semibold
                     transition-all duration-200
-                    active:scale-95
+                    active:scale-95 hover:brightness-110
                     ${!rating || !text.trim()
                         ? "bg-gray-600 text-gray-400 cursor-not-allowed"
                         : "bg-accent text-black"

@@ -17,7 +17,7 @@ function UserReview({ review, onDelete, onEdit, isDeleting }) {
     if (!review) return null;
 
     return (
-        <div className="bg-base rounded-xl p-4 space-y-3 md:space-y-4 border border-accent/30 transition-all duration-200">
+        <div className="bg-base rounded-xl p-4 space-y-3 md:space-y-4 border border-accent/30 transition-all ease-out hover:shadow-lg hover:shadow-black/20 animate-in fade-in duration-300">
 
             {/* Header */}
             <div className="flex items-center gap-3">
@@ -31,7 +31,7 @@ function UserReview({ review, onDelete, onEdit, isDeleting }) {
                             e.stopPropagation();
                             navigate(`/profile/${user?.username}`);
                         }}
-                        className=" w-10 h-10 rounded-full cursor-pointer transition-all duration-200 hover:opacity-80"
+                        className=" w-10 h-10 rounded-full cursor-pointer transition-all duration-200 hover:opacity-80 hover:scale-105"
                     />
                 )}
 

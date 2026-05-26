@@ -6,7 +6,7 @@ function AlbumCard({ album }) {
     const navigate = useNavigate();
 
     return (
-        <div onClick={() => navigate(`/album/${album.id}`)} className="bg-[#141A18] rounded-xl p-4 flex gap-4 hover:bg-[#1A221F] transition cursor-pointer">
+        <div onClick={() => navigate(`/album/${album.id}`)} className="bg-[#141A18] rounded-xl p-4 flex gap-4 hover:bg-[#1A221F] transition cursor-pointer animate-in fade-in duration-300">
 
             {/* Cover */}
             <img
