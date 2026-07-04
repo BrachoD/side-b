@@ -178,7 +178,7 @@ function ProfilePage() {
                     <input
                         value={newUsername}
                         onChange={(e) => setNewUsername(e.target.value)}
-                        className="bg-base p-2 rounded-md w-full text-sm outline-none focus:ring-2 focus:ring-accent"
+                        className="bg-surface p-2 rounded-md w-full text-sm outline-none focus:ring-2 focus:ring-accent"
                     />
 
                     <div className="flex gap-2">

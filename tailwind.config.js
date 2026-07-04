@@ -5,8 +5,8 @@ export default {
   theme: {
     extend: {
       colors: {
-        base: "#141A18",
-        baseHover: "#1A221F",
+        surface: "#141A18",
+        surfaceHover: "#1A221F",
         accent: "#4ade80", //green-400
       },
     },

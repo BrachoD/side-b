@@ -43,7 +43,7 @@ function SearchPage() {
                 type="text"
                 placeholder="Search albums, artist, users..."
                 autoComplete="off"
-                className="w-full p-3 rounded-md bg-base text-sm md:text-base outline-none focus:ring-2 focus:ring-accent transition-all duration-200"
+                className="w-full p-3 rounded-md bg-surface text-sm md:text-base outline-none focus:ring-2 focus:ring-accent transition-all duration-200"
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
             />
@@ -69,7 +69,7 @@ function SearchPage() {
                                 <div
                                     key={user.$id}
                                     onClick={() => navigate(`/profile/${user.username}`)}
-                                    className="flex items-center gap-3 p-2 rounded-md cursor-pointer hover:bg-baseHover hover:translate-x-1 transition-all duration-200 active:scale-[0.98]"
+                                    className="flex items-center gap-3 p-2 rounded-md cursor-pointer hover:bg-surfaceHover hover:translate-x-1 transition-all duration-200 active:scale-[0.98]"
                                 >
                                     <img
                                         src={getAvatar(user)}

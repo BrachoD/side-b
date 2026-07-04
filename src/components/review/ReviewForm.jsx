@@ -5,7 +5,7 @@ function ReviewForm({ onSubmit, initialData }) {
     const [text, setText] = useState(initialData?.text || "");
 
     return (
-        <div className="bg-base rounded-xl p-4 space-y-4 md:space-y-5">
+        <div className="bg-surface rounded-xl p-4 space-y-4 md:space-y-5">
             <h2 className="font-semibold text-sm md:text-base">Write Review</h2>
 
             {/* Rating */}
@@ -26,7 +26,7 @@ function ReviewForm({ onSubmit, initialData }) {
                 value={text}
                 maxLength={500}
                 onChange={(e) => setText(e.target.value)}
-                className="w-full bg-base p-3 rounded-md text-sm md:text-base outline-none resize-none min-h-[120px] md:min-h-[140px] focus:ring-2 focus:ring-accent focus:scale-[1.01] transition-all duration-200"
+                className="w-full bg-surface p-3 rounded-md text-sm md:text-base outline-none resize-none min-h-[120px] md:min-h-[140px] focus:ring-2 focus:ring-accent focus:scale-[1.01] transition-all duration-200"
             />
             <p className="text-xs text-gray-400 text-right">
                 {text.length}/500

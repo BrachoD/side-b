@@ -13,12 +13,12 @@ function ReviewCard({ review }) {
     const navigate = useNavigate();
 
     return (
-        <div onClick={() => navigate(`/album/${review.album.id}`)} className="bg-base rounded-xl p-4 space-y-4 hover:bg-baseHover transition-all ease-out active:scale-[0.98] hover:-translate-y-0.5 hover:shadow-lg hover:shadow-black/20 animate-in fade-in duration-300">
+        <div onClick={() => navigate(`/album/${review.album.id}`)} className="bg-surface rounded-xl p-4 space-y-4 hover:bg-surfaceHover transition-all ease-out active:scale-[0.98] hover:-translate-y-0.5 hover:shadow-lg hover:shadow-black/20 animate-in fade-in duration-300">
 
             {/* Header */}
             <div className="flex items-center gap-3">
                 {isLoading ? (
-                    <div className="w-10 h-10 rounded-full bg-baseHover animate-pulse" />
+                    <div className="w-10 h-10 rounded-full bg-surfaceHover animate-pulse" />
                 ) : (
                     <img
                         src={getAvatar(user)}

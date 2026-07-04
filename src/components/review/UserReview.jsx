@@ -17,12 +17,12 @@ function UserReview({ review, onDelete, onEdit, isDeleting }) {
     if (!review) return null;
 
     return (
-        <div className="bg-base rounded-xl p-4 space-y-3 md:space-y-4 border border-accent/30 transition-all ease-out hover:shadow-lg hover:shadow-black/20 animate-in fade-in duration-300">
+        <div className="bg-surface rounded-xl p-4 space-y-3 md:space-y-4 border border-accent/30 transition-all ease-out hover:shadow-lg hover:shadow-black/20 animate-in fade-in duration-300">
 
             {/* Header */}
             <div className="flex items-center gap-3">
                 {isLoading ? (
-                    <div className="w-10 h-10 rounded-full bg-baseHover animate-pulse" />
+                    <div className="w-10 h-10 rounded-full bg-surfaceHover animate-pulse" />
                 ) : (
                     <img
                         src={getAvatar(user)}

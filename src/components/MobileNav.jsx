@@ -11,7 +11,7 @@ function MobileNav() {
     ];
 
     return (
-        <div className="fixed bottom-0 left-0 w-full bg-base border-t border-white/10 flex justify-around items-center py-2 md:hidden z-50">
+        <div className="fixed bottom-0 left-0 w-full bg-surface border-t border-white/10 flex justify-around items-center py-2 md:hidden z-50">
             {items.map((item) => {
                 const isActive = item.path === "/profile"
                     ? location.pathname.startsWith("/profile")
