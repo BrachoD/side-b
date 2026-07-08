@@ -3,7 +3,7 @@ import LogoutButton from "./ui/LogoutButton";
 
 function Sidebar() {
     return (
-        <aside className="w-64 bg-[#0F1513] p-6 flex flex-col justify-between">
+        <aside className="h-screen sticky top-0 w-64 bg-[#0F1513] p-6 flex flex-col justify-between">
             <div>
                 <h1 className="text-xl font-bold mb-8">🎵 Side B</h1>
 

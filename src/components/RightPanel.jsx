@@ -1,6 +1,6 @@
 function RightPanel() {
     return (
-        <aside className="w-80 bg-[#0F1513] p-6 hidden lg:block">
+        <aside className="h-screen sticky top-0 w-80 bg-[#0F1513] p-6 hidden lg:block">
             <h2 className="text-lg font-semibold mb-4">Trending Albums</h2>
 
             <div className="space-y-3">

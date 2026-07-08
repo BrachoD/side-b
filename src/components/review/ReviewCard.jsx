@@ -13,7 +13,25 @@ function ReviewCard({ review }) {
     const navigate = useNavigate();
 
     return (
-        <div onClick={() => navigate(`/album/${review.album.id}`)} className="bg-surface rounded-xl p-4 space-y-4 hover:bg-surfaceHover transition-all ease-out active:scale-[0.98] hover:-translate-y-0.5 hover:shadow-lg hover:shadow-black/20 animate-in fade-in duration-300">
+        <div onClick={() => navigate(`/album/${review.album.id}`)} className="bg-surface rounded-xl p-4 space-y-3 hover:bg-surfaceHover transition-all ease-out active:scale-[0.98] hover:-translate-y-0.5 hover:shadow-lg hover:shadow-black/20 animate-in fade-in duration-300">
+
+            {/* Album Info */}
+            <div className="flex items-start gap-4">
+                <img
+                    src={review.album.cover}
+                    alt={review.album.title}
+                    className="w-16 h-16 rounded-lg shadow-md object-cover flex-shrink-0"
+                />
+
+                <div className="flex-1 min-w-0">
+                    <p className="font-semibold text-base leading-tight truncate">{review.album.title}</p>
+                    <p className="text-xs md:text-sm text-gray-400">{review.album.artist}</p>
+
+                    <RatingStars rating={review.rating} />
+                </div>
+            </div>
+
+            <div className="border-t border-white/5" />
 
             {/* Header */}
             <div className="flex items-center gap-3">
@@ -40,35 +58,21 @@ function ReviewCard({ review }) {
                     >
                         {user?.username || "Unknown"}
                     </p>
-                    <p className="text-xs text-gray-400">
+                    <p className="text-xs text-gray-500">
                         {formatDate(review.date)}
                     </p>
                 </div>
             </div>
 
-            {/* Album Info */}
-            <div className="flex gap-3 md:gap-4">
-                <img
-                    src={review.album.cover}
-                    alt={review.album.title}
-                    className="w-14 h-14 md:w-16 md:h-16 rounded-md object-cover"
-                />
-
-                <div>
-                    <p className="font-semibold text-sm md:text-base">{review.album.title}</p>
-                    <p className="text-xs md:text-sm text-gray-400">{review.album.artist}</p>
-
-                    <RatingStars rating={review.rating} />
-                </div>
-            </div>
-
             {/* Review Text */}
-            <p className="text-sm text-gray-300">
+            <p className="text-sm text-gray-300 leading-6 ">
                 {review.text}
             </p>
 
+            <div className="border-t border-white/5" />
+
             {/* Actions */}
-            <div className="flex gap-4 text-sm">
+            <div className="flex gap-4 items-center pt-0">
                 <button
                     onClick={(e) => {
                         e.stopPropagation();
