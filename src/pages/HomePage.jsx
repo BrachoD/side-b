@@ -99,7 +99,7 @@ function HomePage() {
 
             {/* FEED */}
             {reviews.map((review) => (
-                <ReviewCard key={review.id} review={review} />
+                <ReviewCard key={review.id} review={review} compact />
             ))}
 
             {/* SEPARADOR */}

@@ -5,7 +5,7 @@ import { useUser } from "../../hooks/useUser";
 import { formatDate } from "../../utils/formatDate";
 import { getAvatar } from "../../utils/getAvatar";
 
-function ReviewCard({ review }) {
+function ReviewCard({ review, compact = false, }) {
 
     const { data: user, isLoading } = useUser(review.userId);
 
@@ -65,7 +65,7 @@ function ReviewCard({ review }) {
             </div>
 
             {/* Review Text */}
-            <p className="text-sm text-gray-300 leading-6 ">
+            <p className={`text-sm text-gray-300 leading-6 ${compact ? "line-clamp-6" : ""} `}>
                 {review.text}
             </p>
 

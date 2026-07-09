@@ -79,3 +79,21 @@ export const updateReview = async (reviewId, data) => {
     data,
   );
 };
+
+export async function getCommunityStats() {
+  const res = await databases.listDocuments(DB_ID, REVIEWS_COLLECTION, [
+    Query.limit(500),
+  ]);
+
+  const reviews = res.documents;
+
+  const uniqueAlbums = new Set(reviews.map((review) => review.albumId));
+
+  const uniqueUsers = new Set(reviews.map((review) => review.userId));
+
+  return {
+    reviews: reviews.length,
+    albums: uniqueAlbums.size,
+    members: uniqueUsers.size,
+  };
+}

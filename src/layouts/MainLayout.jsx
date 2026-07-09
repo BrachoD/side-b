@@ -1,5 +1,5 @@
 import Sidebar from "../components/Sidebar";
-import RightPanel from "../components/RightPanel";
+import RightPanel from "../components/rightPanel/RightPanel";
 import MobileNav from "../components/MobileNav";
 
 function MainLayout({ children }) {
