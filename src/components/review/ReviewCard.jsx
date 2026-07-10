@@ -5,7 +5,7 @@ import { useUser } from "../../hooks/useUser";
 import { formatDate } from "../../utils/formatDate";
 import { getAvatar } from "../../utils/getAvatar";
 
-function ReviewCard({ review, compact = false, }) {
+function ReviewCard({ review, compact = false, clickable = true, }) {
 
     const { data: user, isLoading } = useUser(review.userId);
 
@@ -13,13 +13,39 @@ function ReviewCard({ review, compact = false, }) {
     const navigate = useNavigate();
 
     return (
-        <div onClick={() => navigate(`/album/${review.album.id}`)} className="bg-surface rounded-xl p-4 space-y-3 hover:bg-surfaceHover transition-all ease-out active:scale-[0.98] hover:-translate-y-0.5 hover:shadow-lg hover:shadow-black/20 animate-in fade-in duration-300">
+        <div onClick={() => { if (!clickable) return; navigate(`/album/${review.album.id}`) }}
+            onKeyDown={(e) => {
+                if (!clickable) return;
+                if (e.key === "Enter" || e.key === " ") {
+                    navigate(`/album/${review.album.id}`);
+                }
+            }} tabIndex={clickable ? 0 : undefined} role={clickable ? "button" : undefined} className={`
+                    bg-surface
+                    rounded-xl
+                    p-4
+                    space-y-3
+                    animate-in
+                    fade-in
+                    duration-300
+                    transition-all
+                    ease-out
+                    focus-visible:outline-none
+                    focus-visible:ring-2
+                    focus-visible:ring-accent
+                    focus-visible:ring-offset-2
+                    focus-visible:ring-offset-[#0B0F0E]
+                    ${clickable
+                    ? "cursor-pointer hover:bg-surfaceHover active:scale-[0.98] hover:-translate-y-0.5 hover:shadow-lg hover:shadow-black/20"
+                    : ""
+                }
+                `}>
 
             {/* Album Info */}
             <div className="flex items-start gap-4">
                 <img
                     src={review.album.cover}
                     alt={review.album.title}
+                    loading="lazy"
                     className="w-16 h-16 rounded-lg shadow-md object-cover flex-shrink-0"
                 />
 
@@ -38,26 +64,32 @@ function ReviewCard({ review, compact = false, }) {
                 {isLoading ? (
                     <div className="w-10 h-10 rounded-full bg-surfaceHover animate-pulse" />
                 ) : (
-                    <img
-                        src={getAvatar(user)}
-                        onClick={(e) => {
-                            e.stopPropagation();
-                            navigate(`/profile/${user?.username}`);
-                        }}
-                        className="w-10 h-10 rounded-full cursor-pointer transition-all duration-200 hover:opacity-80 hover:scale-105"
-                    />
+                    <button onClick={(e) => {
+                        e.stopPropagation();
+                        navigate(`/profile/${user?.username}`);
+                    }} aria-label={`View ${user?.username}'s profile`}
+                        className="focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent rounded-full">
+                        <img
+                            src={getAvatar(user)}
+                            alt={`${user?.username}'s avatar`}
+                            loading="lazy"
+                            className="w-10 h-10 rounded-full cursor-pointer transition-all duration-200 hover:opacity-80 hover:scale-105"
+                        />
+
+                    </button>
                 )}
 
                 <div>
-                    <p
+                    <button
                         onClick={(e) => {
                             e.stopPropagation();
                             navigate(`/profile/${user?.username}`);
                         }}
-                        className="text-sm font-semibold cursor-pointer hover:underline hover:text-white transition-all duration-200"
+                        aria-label={`View ${user?.username}'s profile`}
+                        className="text-sm font-semibold cursor-pointer hover:underline hover:text-white transition-all duration-200 focus-visible:outline-none focus-visible:underline"
                     >
                         {user?.username || "Unknown"}
-                    </p>
+                    </button>
                     <p className="text-xs text-gray-500">
                         {formatDate(review.date)}
                     </p>
@@ -84,6 +116,11 @@ function ReviewCard({ review, compact = false, }) {
                             : "text-gray-400 hover:text-accent"
                         }
                         `}
+                    aria-label={
+                        hasLiked
+                            ? "Remove like from review"
+                            : "Like review"
+                    }
                 >
                     👍 {likeCount}
                 </button>

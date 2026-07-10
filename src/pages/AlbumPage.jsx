@@ -223,7 +223,7 @@ function AlbumPage() {
                 </div>
             )}
             {otherReviews.length > 0 && (
-                <ReviewList reviews={otherReviews} />
+                <ReviewList reviews={otherReviews} clickable={false} />
             )}
         </div>
     );

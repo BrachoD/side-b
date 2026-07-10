@@ -225,7 +225,7 @@ function ProfilePage() {
                     )}
                 </div>
             ) : (
-                <ReviewList reviews={reviews} title="Reviews" />
+                <ReviewList reviews={reviews} title="Reviews" clickable={true} />
             )}
         </div>
     );
