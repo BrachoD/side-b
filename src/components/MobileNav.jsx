@@ -1,38 +1,55 @@
-import { useNavigate, useLocation } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 
 function MobileNav() {
-    const navigate = useNavigate();
+
     const location = useLocation();
 
     const items = [
-        { label: "Home", path: "/" },
-        { label: "Search", path: "/search" },
-        { label: "Profile", path: "/profile" },
+        {
+            label: "Home",
+            path: "/",
+            isActive: (pathname) => pathname === "/",
+        },
+        {
+            label: "Search",
+            path: "/search",
+            isActive: (pathname) => pathname === "/search",
+        },
+        {
+            label: "Profile",
+            path: "/profile",
+            isActive: (pathname) => pathname === "/profile",
+        },
     ];
 
     return (
-        <div className="fixed bottom-0 left-0 w-full bg-surface border-t border-white/10 flex justify-around items-center py-2 md:hidden z-50">
+        <nav aria-label="Mobile navigation" className="fixed bottom-0 left-0 w-full bg-surface border-t border-white/10 flex justify-around items-center py-2 md:hidden z-50">
             {items.map((item) => {
-                const isActive = item.path === "/profile"
-                    ? location.pathname.startsWith("/profile")
-                    : location.pathname === item.path;
+                const isActive = item.isActive(location.pathname);
 
                 return (
-                    <button
+                    <NavLink
                         key={item.path}
-                        onClick={() => navigate(item.path)}
+                        to={item.path}
+                        aria-current={isActive ? "page" : undefined}
                         className={`
                             flex flex-col items-center justify-center
                             text-xs
                             transition-all duration-200
+                            focus-visible:outline-none
+                            focus-visible:ring-2
+                            focus-visible:ring-accent
+                            focus-visible:ring-offset-2
+                            focus-visible:ring-offset-[#0B0F0E]
+                            rounded-md
                             ${isActive ? "text-accent" : "text-gray-400"}
-                            `}
+                        `}
                     >
                         <span>{item.label}</span>
-                    </button>
+                    </NavLink>
                 );
             })}
-        </div>
+        </nav>
     );
 }
 

@@ -5,9 +5,7 @@ import { getAvatar } from "../../utils/getAvatar";
 import { formatDate } from "../../utils/formatDate";
 import { useNavigate } from "react-router-dom";
 
-
 function UserReview({ review, onDelete, onEdit, isDeleting }) {
-
     const navigate = useNavigate();
 
     const { data: user, isLoading } = useUser(review?.userId);
@@ -24,25 +22,30 @@ function UserReview({ review, onDelete, onEdit, isDeleting }) {
                 {isLoading ? (
                     <div className="w-10 h-10 rounded-full bg-surfaceHover animate-pulse" />
                 ) : (
-                    <img
-                        src={getAvatar(user)}
-                        alt={user?.username}
-                        onClick={(e) => {
-                            e.stopPropagation();
-                            navigate(`/profile/${user?.username}`);
-                        }}
-                        className=" w-10 h-10 rounded-full cursor-pointer transition-all duration-200 hover:opacity-80 hover:scale-105"
-                    />
+                    <button
+                        onClick={() => navigate(`/profile/${user?.username}`)}
+                        aria-label={`View ${user?.username}'s profile`}
+                        className="focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-[#0B0F0E] rounded-full"
+                    >
+                        <img
+                            src={getAvatar(user)}
+                            alt={`${user?.username}'s avatar`}
+                            loading="lazy"
+                            className="w-10 h-10 rounded-full transition-all duration-200 hover:opacity-80 hover:scale-105"
+                        />
+                    </button>
                 )}
 
                 <div>
-                    <p onClick={(e) => {
-                        e.stopPropagation();
-                        navigate(`/profile/${user?.username}`);
-                    }} className="text-sm font-semibold cursor-pointer hover:underline hover:text-white transition-all duration-200">
+                    <button
+                        onClick={() => navigate(`/profile/${user?.username}`)}
+                        aria-label={`View ${user?.username}'s profile`}
+                        className="text-sm font-semibold hover:underline hover:text-white transition-all duration-200 focus-visible:outline-none focus-visible:underline"
+                    >
                         {user?.username || "Loading..."}{" "}
                         <span className="text-accent">(You)</span>
-                    </p>
+                    </button>
+
                     <p className="text-xs text-gray-400">
                         {formatDate(review.date)}
                     </p>
@@ -53,19 +56,26 @@ function UserReview({ review, onDelete, onEdit, isDeleting }) {
             <RatingStars rating={review.rating} />
 
             {/* Review text */}
-            <p className="text-sm md:text-base text-gray-300">
+            <p className="text-sm md:text-base text-gray-300 leading-6">
                 {review.text}
             </p>
 
             {/* Actions */}
             <div className="flex flex-wrap gap-3 text-sm">
+
                 <button
-                    onClick={(e) => {
-                        e.stopPropagation();
-                        toggleLike();
-                    }}
-                    className={`cursor-pointer transition-all duration-200 active:scale-90
-                            ${hasLiked
+                    onClick={toggleLike}
+                    aria-label={
+                        hasLiked
+                            ? "Remove like from review"
+                            : "Like review"
+                    }
+                    className={`
+                        cursor-pointer
+                        transition-all
+                        duration-200
+                        active:scale-90
+                        ${hasLiked
                             ? "text-accent scale-110"
                             : "text-gray-400 hover:text-accent"
                         }
@@ -75,30 +85,40 @@ function UserReview({ review, onDelete, onEdit, isDeleting }) {
                 </button>
 
                 <button
-                    onClick={(e) => {
-                        e.stopPropagation();
-                        onEdit();
-                    }}
-                    className="text-blue-400 cursor-pointer hover:text-blue-300 transition-all duration-200"
+                    onClick={onEdit}
+                    aria-label="Edit review"
+                    className="text-blue-400 hover:text-blue-300 transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 rounded"
                 >
                     Edit
                 </button>
 
-
                 <button
-                    onClick={(e) => {
-                        e.stopPropagation();
+                    onClick={() => {
                         if (!confirm("Delete this review?")) return;
                         onDelete();
                     }}
                     disabled={isDeleting}
-                    className={`text-red-400 cursor-pointer hover:text-red-300 transition-all duration-200 ${isDeleting ? "opacity-50 cursor-not-allowed" : ""
-                        }`}
+                    aria-label="Delete review"
+                    className={`
+                        text-red-400
+                        hover:text-red-300
+                        transition-all
+                        duration-200
+                        focus-visible:outline-none
+                        focus-visible:ring-2
+                        focus-visible:ring-red-400
+                        rounded
+                        ${isDeleting
+                            ? "opacity-50 cursor-not-allowed"
+                            : "cursor-pointer"
+                        }
+                    `}
                 >
                     {isDeleting ? "Deleting..." : "Delete"}
                 </button>
+
             </div>
-        </div >
+        </div>
     );
 }
 
